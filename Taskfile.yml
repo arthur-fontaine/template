@@ -1,0 +1,16 @@
+version: '3'
+
+vars:
+
+tasks:
+  generate:
+    deps:
+      - check-setup
+    aliases: [gen]
+    cmds:
+      - bunx plop --plopfile ./.tools/gen/plopfile.mjs --dest . {{.CLI_ARGS}}
+
+  check-setup:
+    cmds:
+      - command -v bunx >/dev/null 2>&1 || { echo "Bunx is not installed. Please install it first."; exit 1; }
+    silent: true
